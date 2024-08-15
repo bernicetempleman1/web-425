@@ -1,0 +1,10 @@
+# Node.js folders and files
+node_modules
+
+# Development tools
+.vscode
+.idea
+
+# System files
+.DS_Store
+
