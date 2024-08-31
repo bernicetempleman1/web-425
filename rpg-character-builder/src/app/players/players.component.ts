@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
     <div>
       <h1>Our Players</h1>
       <p>
-        Explore our selection of handcrafted tacos, each filled with fresh
+        Explore our selection of handcrafted characters, each filled with fresh
         ingredients and vibrant flavors to satisfy your cravings.
       </p>
       <ul class="players-container">
@@ -66,16 +66,16 @@ export class PlayersComponent {
       {
         name: 'Bernice',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
-        startingLocation: 'Ohio',
-        funFact: '',
+        startingLocation: 'US',
+        funFact: 'Web Developer',
       },
       {
         name: 'Berenice',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Judaea',
@@ -84,16 +84,16 @@ export class PlayersComponent {
       {
         name: 'Asherah',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Israel',
-        funFact: 'a goddess in ancient Semitic religions',
+        funFact: 'A goddess in ancient Semitic religions',
       },
       {
         name: 'Shechinah',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Jewish',
         startingLocation: 'Ancient Israel',
@@ -102,7 +102,7 @@ export class PlayersComponent {
       {
         name: 'Hatshepsut',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Egypt',
@@ -120,7 +120,7 @@ export class PlayersComponent {
       {
         name: 'Maat',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Egypt',
@@ -129,7 +129,7 @@ export class PlayersComponent {
       {
         name: 'Nut',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Egypt',
@@ -138,7 +138,7 @@ export class PlayersComponent {
       {
         name: 'Hathor',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Egypt',
@@ -148,7 +148,7 @@ export class PlayersComponent {
       {
         name: 'Amunet',
         gender:
-          'female',
+          'Female',
         class: 'Mage',
         faction: 'Eternal',
         startingLocation: 'Ancient Egypt',
