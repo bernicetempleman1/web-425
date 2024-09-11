@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,18 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       <header class="banner">
         <img
           src="/assets/VirtualTacoStand.png"
-          alt="website banner for virtual
-taco stand"
-          class="banner-img"
+          alt="website banner for virtualtaco stand"
+           class="banner-img"
         />
       </header>
+      <div class="sign-in-container">
+        @if (email) {
+        <p>Welcome, {{ email }}!</p>
+        <button (click)="signout()">Sign Out</button>
+        } @else {
+        <a routerLink="/signin" class="sign-in-link">Sign In</a>
+        }
+      </div>
       <main class="main-content">
         <nav class="navbar">
           <ul>
@@ -58,4 +67,21 @@ taco stand"
     `,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  email?: string;
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {}
+  ngOnInit() {
+    this.authService.getAuthState().subscribe((isAuth) => {
+      if (isAuth) {
+        this.email = this.cookieService.get('session_user');
+      }
+    });
+  }
+  signout() {
+    this.authService.signout();
+    this.email ="";
+  }
+}
