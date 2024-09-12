@@ -21,6 +21,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
+  //Test 1: Should set cookie and authState to true on successful sign in.
   it('should set cookie and authState to true on successful signin', () => {
     const result = service.signin('wizardlywand@hogwarts.com', 'Alohomora123');
     expect(result).toBeTrue();
@@ -30,6 +31,7 @@ describe('AuthService', () => {
     expect(cookieServiceSpy.set.calls.count()).toBe(1);
   });
 
+  // Test 2: Should not set cookie and authState to true on unsuccessful sign in
   it('should not set cookie and authState to true on unsuccessful signin', () => {
     const result = service.signin('wrongemail@hogwarts.com', 'wrongpassword');
     expect(result).toBeFalse();

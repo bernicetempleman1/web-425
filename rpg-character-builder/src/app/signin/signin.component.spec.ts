@@ -4,6 +4,7 @@ import { SigninComponent } from './signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { of } from 'rxjs';
+
 class MockAuthService {
   signin(email: string, password: string) {
     return of(true);
@@ -21,9 +22,12 @@ describe('SigninComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //Test 3: Should call signin method on form submission.
   it('should call signin method on form submit', () => {
     const signInSpy = spyOn(
       (component as any).authService,
@@ -35,29 +39,3 @@ describe('SigninComponent', () => {
     expect(signInSpy).toHaveBeenCalledWith('test@example.com', 'Password123');
   });
 });
-
-/*
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SigninComponent } from './signin.component';
-
-describe('SigninComponent', () => {
-  let component: SigninComponent;
-  let fixture: ComponentFixture<SigninComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SigninComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(SigninComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
-*/
