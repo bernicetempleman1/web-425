@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -38,9 +39,11 @@ export class AuthService {
       },
     ];
   }
+  
   getAuthState() {
     return this.authState.asObservable();
   }
+
   signin(email: string, password: string) {
     const user = this.users.find(
       (user) => user.email === email && user.password === password

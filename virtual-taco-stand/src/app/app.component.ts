@@ -82,6 +82,5 @@ export class AppComponent {
   }
   signout() {
     this.authService.signout();
-    this.email ="";
   }
 }
