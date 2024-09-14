@@ -7,17 +7,18 @@ export interface Character {
 
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   template: `
     <div class="character-form-container">
       <form
         class="character-form"
         #characterForm="ngForm"
-        (ngSubmit)="createCharacter()"
+        (ngSubmit)="createCharacter();"
       >
         <h1>Complete the form below to create a character.</h1>
         <fieldset>

@@ -16,6 +16,7 @@ import { AuthService } from './auth.service';
           class="banner-img"
         />
       </header>
+
       <div class="sign-in-container">
         @if (email) {
         <p>Welcome, {{ email }}!</p>
@@ -24,12 +25,15 @@ import { AuthService } from './auth.service';
         <a routerLink="/signin" class="sign-in-link">Sign In</a>
         }
       </div>
+
+
+
       <main class="main-content">
+
         <nav class="navbar">
           <ul>
             <li><a routerLink="/">Home</a></li>
             <li><a href="/players">Players</a></li>
-            <li><a href="/signin">Sign In</a></li>
             <li><a href="/create-character">Create Character</a></li>
             <li><a href="/create-guild">Create Guild</a></li>
             <li><a href="/create-faction">Character Faction</a></li>
@@ -39,10 +43,10 @@ import { AuthService } from './auth.service';
           <router-outlet />
         </section>
       </main>
+      
       <footer class="footer">
         <nav class="footer-nav">
           <a routerLink="/">Home</a> | <a href="/players">Players</a> |
-          <a href="/signin">Sign In</a> |
           <a href="/create-character">Create Character</a> |
           <a href="/create-guild">Create Guild</a> |
           <a href="/create-faction">Character Faction</a>
@@ -84,5 +88,6 @@ export class AppComponent {
   }
   signout() {
     this.authService.signout();
+    this.email ='';
   }
 }

@@ -3,6 +3,7 @@ export interface User {
   email: string;
   password: string;
 }
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -39,7 +40,7 @@ export class AuthService {
       },
     ];
   }
-  
+
   getAuthState() {
     return this.authState.asObservable();
   }
