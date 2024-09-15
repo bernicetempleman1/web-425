@@ -41,36 +41,41 @@ import { AuthService } from '../auth.service';
       </form>
     </div>
   `,
-  styles: `
-.signin-form-container {
-display: flex;
-justify-content: space-between;
-width: 50%;
-}
-.signin-form {
-flex: 1;
-margin-right: 20px;
-}
-label, input {
-display: block;
-margin-bottom: 5px;
-}
-input, input[type="submit"] {
-padding: 8px;
-box-sizing: border-box;
-}
-input[type="email"], input[type="password"] {
-width: 100%;
-}
-input[type="submit"] {
-margin-top: 10px;
-float: right;
-}
-.error {
-color: red;
-padding: 5px;
-}
-`,
+  styles: [
+    `
+      .signin-form-container {
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+      }
+      .signin-form {
+        flex: 1;
+        margin-right: 20px;
+      }
+      label,
+      input {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input,
+      input[type='submit'] {
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      input[type='email'],
+      input[type='password'] {
+        width: 100%;
+      }
+      input[type='submit'] {
+        margin-top: 10px;
+        float: right;
+      }
+      .error {
+        color: red;
+        padding: 5px;
+      }
+    `,
+  ],
 })
 export class SigninComponent {
   signinForm: FormGroup = this.fb.group({
