@@ -8,16 +8,6 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
-
-/*
-guildName (text),
-description (textarea),
-type (select menu) with options for “Competitive, Casual, Social, Educational,”
-acceptTerms (checkbox)
-notificationPreference (radio) with options for “Email, SMS, In-App).
-*/
-
-
 @Component({
   selector: 'app-create-guild',
   standalone: true,
@@ -29,62 +19,73 @@ notificationPreference (radio) with options for “Email, SMS, In-App).
         class="create-guild-form"
         (ngSubmit)="leaveCreateGuild(); createGuildForm.reset()"
       >
-        <h1>Complete the form below to leave feedback.</h1>
+        <h1>Complete the form below to create a guild.</h1>
         <fieldset>
           <legend>Create Guild Form</legend>
 
+          <label>Guild Name:</label>
+          <input
+            type="text"
+            formControlName="guildName"
+            value="guildName"
+            required="true"
+          />
 
+          <label>Description:</label>
+          <textarea rows="10" formControlName="description" required="true"></textarea>
 
-
-
-
-
-
-
-
-          <label>Rate our service</label>
-          @for(rating of ratings; track rating) {
-          <input type="radio" [value]="rating" formControlName="rating" />
-          {{ rating }} <br />
-          }
-          <label>What did you like about our service?</label>
-          <div formArrayName="likes">
-            @for(like of likesArray.controls; track like; let i = $index) {
-            <input type="checkbox" [formControlName]="i" /> {{ likes[i] }}
-            <br />
-            }
-          </div>
-          <label>What you recommend us?</label>
-          <select formControlName="recommend">
+          <label>Type:</label>
+          <select formControlName="type">
             @for(option of recommendedOptions; track option) {
             <option [value]="option">{{ option }}</option>
             }
           </select>
-          <label>Any additional comments?</label>
-          <textarea rows="10" formControlName="comments"></textarea>
+
+          <label>Notification Preference:</label>
+          @for(notification of notifications; track notification) {
+          <input type="radio" [value]="notification" formControlName="notification" />
+          {{ notification }} <br />
+          }
+
+          <label>Accept Terms:</label>
+          <div formArrayName="acceptTerms">
+            @for(acceptTerm of acceptTermsArray.controls; track acceptTerm; let i = $index) {
+            <input type="checkbox" [formControlName]="i"
+            [required]="true"
+            /> {{ acceptTerms[i] }}
+            <br />
+            }
+          </div>
+
           <input
             type="submit"
             [disabled]="!createGuildForm.valid"
-            value="Leave Feedback"
+            value="submit"
           />
+
         </fieldset>
       </form>
-      <div class="createguild">
-        <h1>Customer Feedback</h1>
-        <div class="createguild-container">
+
+      <div class="create-guild">
+        <h1>Guilds:</h1>
+        <div class="create-guild-container">
           @for(createguild of preexistingCreateGuild; track createguild) {
-          <div class="createguild-card">
-            <h2>Rating: {{ createguild.rating }}</h2>
-            <h3>Likes:</h3>
+          <div class="create-guild-card">
+          <h2>Guild Name:</h2>
+            <p>{{ createguild.guildName }}</p>
+            <h3>Description:</h3>
+            <p>{{ createguild.description }}</p>
+            <h3>Type:</h3>
+            <p>{{ createguild.type }}</p>
+            <h3>Notification Preference:</h3>
+            <p>{{ createguild.notification }}</p>
+            <h3>Accept Terms:</h3>
             <ul class="likes-list">
-              @for(like of createguild.likes; track like) {
-              <li>{{ like }}</li>
-              }
+            @for(acceptTerm of createguild.acceptTerms; track acceptTerm) {
+            <li>{{ acceptTerm }}</li>
+            }
             </ul>
-            <h3>Would you recommend us?</h3>
-            <p>{{ createguild.recommend }}</p>
-            <h3>Comments:</h3>
-            <p>{{ createguild.comments }}</p>
+
           </div>
           }
         </div>
@@ -164,79 +165,95 @@ margin-bottom: 20px;
 }
 `,
 })
+
 export class CreateGuildComponent {
 
-  ratings: string[] = ['1', '2', '3', '4', '5'];
-  likes: string[] = ['Service', 'Quality', 'Price', 'Ambience', 'Other'];
-  recommendedOptions: string[] = ['Yes', 'No'];
+  typeOptions: string[] = ['Competitive', 'Casual', 'Social', 'Educational'];
+  recommendedOptions: string[] = ['Competitive', 'Casual', 'Social', 'Educational'];
+  notifications: string[] = ['Email', 'SMS', 'In-App'];
+  acceptTerms: string[] = ['Yes'];
   preexistingCreateGuild: any;
+
   createGuildForm: FormGroup = this.fb.group({
-    rating: [null, Validators.compose([Validators.required])],
-    likes: this.fb.array(this.likes.map(() => false)),
-    recommend: [null, Validators.compose([Validators.required])],
-    comments: [null],
+    guildName: [null],
+    description: [null],
+    type: [null, Validators.compose([Validators.required])],
+    notification: [null, Validators.compose([Validators.required])],
+    acceptTerms:  this.fb.array(this.acceptTerms.map(() => false)),
   });
+
   constructor(private fb: FormBuilder) {
     this.preexistingCreateGuild = [
       {
-        rating: '5',
-        likes: ['Service', 'Quality'],
-        recommend: 'Yes',
-        comments:
+        guildName: 'Software Developer',
+        description:
           'Everything was perfect, from the service to the quality of the products.',
+        type: ['Competitive'],
+        notification: ['Email'],
+        acceptTerms: ['true'],
       },
       {
-        rating: '4',
-        likes: ['Price'],
-        recommend: 'Yes',
-        comments:
-          'Great prices and good service, will definitely recommend to friends.',
+        guildName: 'System Administrator',
+        description:
+          'Everything was perfect, from the service to the quality of the products.',
+        type: ['Casual'],
+        notification: ['SMS'],
+        acceptTerms: ['true'],
       },
       {
-        rating: '3',
-        likes: ['Ambience'],
-        recommend: 'No',
-        comments: 'The ambience was nice, but the service could be improved.',
+        guildName: 'Technical Support Engineer',
+        description:
+          'Everything was perfect, from the service to the quality of the products.',
+        type: ['Social'],
+        notification: ['In-App'],
+        acceptTerms: ['true'],
       },
       {
-        rating: '2',
-        likes: ['Service'],
-        recommend: 'No',
-        comments:
-          'The service was slow, and the quality of the food was not up to the mark.',
+        guildName: 'Platform Engineer',
+        description:
+          'Everything was perfect, from the service to the quality of the products.',
+        type: ['Educational'],
+        notification: ['Email'],
+        acceptTerms: ['true'],
       },
       {
-        rating: '5',
-        likes: ['Service', 'Quality', 'Price', 'Ambience'],
-        recommend: 'Yes',
-        comments:
-          'Absolutely loved everything! Great value for money and friendly staff.',
+        guildName: 'Cyber Security Specialist',
+        description:
+          'Everything was perfect, from the service to the quality of the products.',
+        type: ['Educational'],
+        notification: ['Email'],
+        acceptTerms: ['true'],
       },
     ];
   }
 
-  get likesArray() {
-    return this.createGuildForm.get('likes') as FormArray;
+  get acceptTermsArray() {
+    return this.createGuildForm.get('acceptTerms') as FormArray;
+  }
+  get typesArray() {
+    return this.createGuildForm.get('types') as FormArray;
   }
 
   leaveCreateGuild() {
     // Get the boolean values for each checkbox from the FormArray
-    const selectedLikesValues = this.likesArray.value;
+    const selectedAcceptTermsValues = this.acceptTermsArray.value;
 
-    // Map and filter the likes based on the boolean values
-    const selectedLikes = this.likes
-      .map((like, index) => (selectedLikesValues[index] ? like : null))
-      .filter((like) => like !== null);
+    //Map and filter the accept based on the boolean values
+    const selectedAcceptTerms = this.acceptTerms
+      .map((acceptTerm, index) => (selectedAcceptTermsValues[index] ? acceptTerm : null))
+      .filter((acceptTerm) => acceptTerm !== null);
 
     const newCreateGuild = {
-      rating: this.createGuildForm.value.rating,
-      likes: selectedLikes,
-      recommend: this.createGuildForm.value.recommend,
-      comments: this.createGuildForm.value.comments,
+      guildName: this.createGuildForm.value.guildName,
+      description: this.createGuildForm.value.description,
+      type: this.createGuildForm.value.type,
+      acceptTerms: this.createGuildForm.value.acceptTerms,
+      notification: this.createGuildForm.value.notification,
+      likes: selectedAcceptTerms,
     };
 
     // Now, selectedLikes contains the actual items that were selected
-    console.log('Selected likes:', selectedLikes);
+    //console.log('Selected types:', selectedType);
     console.log('Complete form value:', newCreateGuild);
     this.preexistingCreateGuild.push(newCreateGuild);
     alert('Guild submitted successfully!');
