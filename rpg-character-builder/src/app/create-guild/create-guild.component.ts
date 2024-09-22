@@ -28,21 +28,21 @@ import {
             type="text"
             formControlName="guildName"
             value="guildName"
-            required="true"
+
           />
 
           <label>Description:</label>
-          <textarea rows="10" formControlName="description" required="true"></textarea>
+          <textarea rows="10" formControlName="description" ></textarea>
 
           <label>Type:</label>
           <select formControlName="type">
-            @for(option of recommendedOptions; track option) {
+            @for(option of typeOptions; track option) {
             <option [value]="option">{{ option }}</option>
             }
           </select>
 
           <label>Notification Preference:</label>
-          @for(notification of notifications; track notification) {
+          @for(notification of notificationPreference; track notification) {
           <input type="radio" [value]="notification" formControlName="notification" />
           {{ notification }} <br />
           }
@@ -50,8 +50,8 @@ import {
           <label>Accept Terms:</label>
           <div formArrayName="acceptTerms">
             @for(acceptTerm of acceptTermsArray.controls; track acceptTerm; let i = $index) {
-            <input type="checkbox" [formControlName]="i"
-            [required]="true"
+            <input [required]="true" type="checkbox" [formControlName]="i"
+
             /> {{ acceptTerms[i] }}
             <br />
             }
@@ -169,14 +169,13 @@ margin-bottom: 20px;
 export class CreateGuildComponent {
 
   typeOptions: string[] = ['Competitive', 'Casual', 'Social', 'Educational'];
-  recommendedOptions: string[] = ['Competitive', 'Casual', 'Social', 'Educational'];
-  notifications: string[] = ['Email', 'SMS', 'In-App'];
+  notificationPreference: string[] = ['Email', 'SMS', 'In-App'];
   acceptTerms: string[] = ['Yes'];
   preexistingCreateGuild: any;
 
   createGuildForm: FormGroup = this.fb.group({
-    guildName: [null],
-    description: [null],
+    guildName: [null, Validators.required],
+    description: [null, Validators.required],
     type: [null, Validators.compose([Validators.required])],
     notification: [null, Validators.compose([Validators.required])],
     acceptTerms:  this.fb.array(this.acceptTerms.map(() => false)),
@@ -187,42 +186,42 @@ export class CreateGuildComponent {
       {
         guildName: 'Software Developer',
         description:
-          'Everything was perfect, from the service to the quality of the products.',
+          'Software developers develop products. Everything was perfect, from the service to the quality of the products.',
         type: ['Competitive'],
         notification: ['Email'],
-        acceptTerms: ['true'],
+        acceptTerms: ['Yes'],
       },
       {
         guildName: 'System Administrator',
         description:
-          'Everything was perfect, from the service to the quality of the products.',
+          'System Administrators maintain the systems serving the products. Everything was perfect, from the service to the quality of the products.',
         type: ['Casual'],
         notification: ['SMS'],
-        acceptTerms: ['true'],
+        acceptTerms: ['Yes'],
       },
       {
         guildName: 'Technical Support Engineer',
         description:
-          'Everything was perfect, from the service to the quality of the products.',
+          'Technical Support Engineers support customers using the systems. Everything was perfect, from the service to the quality of the products.',
         type: ['Social'],
         notification: ['In-App'],
-        acceptTerms: ['true'],
+        acceptTerms: ['Yes'],
       },
       {
         guildName: 'Platform Engineer',
         description:
-          'Everything was perfect, from the service to the quality of the products.',
+          'Platform Engineers design and support the platforms serving the products and environments. Everything was perfect, from the service to the quality of the products.',
         type: ['Educational'],
         notification: ['Email'],
-        acceptTerms: ['true'],
+        acceptTerms: ['Yes'],
       },
       {
         guildName: 'Cyber Security Specialist',
         description:
-          'Everything was perfect, from the service to the quality of the products.',
+          'Cyber Security Specialists secure the platforms and systems serving the products. Everything was perfect, from the service to the quality of the products.',
         type: ['Educational'],
         notification: ['Email'],
-        acceptTerms: ['true'],
+        acceptTerms: ['Yes'],
       },
     ];
   }
@@ -230,9 +229,7 @@ export class CreateGuildComponent {
   get acceptTermsArray() {
     return this.createGuildForm.get('acceptTerms') as FormArray;
   }
-  get typesArray() {
-    return this.createGuildForm.get('types') as FormArray;
-  }
+
 
   leaveCreateGuild() {
     // Get the boolean values for each checkbox from the FormArray
@@ -240,20 +237,18 @@ export class CreateGuildComponent {
 
     //Map and filter the accept based on the boolean values
     const selectedAcceptTerms = this.acceptTerms
-      .map((acceptTerm, index) => (selectedAcceptTermsValues[index] ? acceptTerm : null))
-      .filter((acceptTerm) => acceptTerm !== null);
+      .map((acceptTerms, index) => (selectedAcceptTermsValues[index] ? acceptTerms : null))
+      .filter((acceptTerms) => acceptTerms !== null);
 
     const newCreateGuild = {
       guildName: this.createGuildForm.value.guildName,
       description: this.createGuildForm.value.description,
       type: this.createGuildForm.value.type,
-      acceptTerms: this.createGuildForm.value.acceptTerms,
       notification: this.createGuildForm.value.notification,
-      likes: selectedAcceptTerms,
+      acceptTerms: selectedAcceptTerms,
     };
 
     // Now, selectedLikes contains the actual items that were selected
-    //console.log('Selected types:', selectedType);
     console.log('Complete form value:', newCreateGuild);
     this.preexistingCreateGuild.push(newCreateGuild);
     alert('Guild submitted successfully!');

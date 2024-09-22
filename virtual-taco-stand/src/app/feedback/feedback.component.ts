@@ -155,6 +155,7 @@ export class FeedbackComponent {
     recommend: [null, Validators.compose([Validators.required])],
     comments: [null],
   });
+  
   constructor(private fb: FormBuilder) {
     this.preexistingFeedback = [
       {
