@@ -45,6 +45,16 @@ describe('CharacterListComponent', () => {
     expect(component).toBeTruthy();
   });
 
+    //Test 1: characters in the newly created component are displaying correctly.
+    it('should display details for each taco in the order', () => {
+
+      component.createcharacter = { characters: [{ id: 1, name: 'Al Pastor', gender: 'Female', class: 'Mage' }] };
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement;
+      expect(compiled.querySelector('li').textContent).toContain(
+        'Al Pastor is a Female Mage');
+    });
+
  //Test 4: should display a message for an empty character list
   it('should display message for empty character list', () => {
     component.createcharacter = { characters: [] };
