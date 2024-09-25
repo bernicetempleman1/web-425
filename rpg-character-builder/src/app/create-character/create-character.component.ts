@@ -7,23 +7,23 @@ export interface Character {
 
 export interface CreateCharacter {
   characters: Character[];
-  orderId: number;
+  //orderId: number;
 }
 
-import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CharacterListComponent } from '../character-list/character-list.component';
 
 @Component({
   selector: 'app-create-character',
   standalone: true,
-  imports: [FormsModule, CommonModule],
   template: `
     <div class="character-form-container">
       <form
         class="character-form"
         #characterForm="ngForm"
-        (ngSubmit)="createCharacter();"
+        (ngSubmit)="createCharacter()"
       >
         <h1>Complete the form below to create a character.</h1>
         <fieldset>
@@ -64,24 +64,8 @@ import { CommonModule } from '@angular/common';
         </fieldset>
       </form>
 
-      <div class="character-summary">
-        <h2>Created Characters</h2>
-        @if (characters.length > 0) {
-        <ul>
-          @for (character of characters; track character) {
-          <li>
-            <strong
-              >{{ character.name }} is a {{ character.gender }}
-              {{ character.class }}
-            </strong>
-            <br />
-          </li>
-          }
-        </ul>
-
-        } @else {
-        <p>No characters have been created yet</p>
-        }
+      <div class="character-list">
+        <app-character-list [createcharacter]="createcharacter"></app-character-list>
       </div>
     </div>
   `,
@@ -97,9 +81,7 @@ import { CommonModule } from '@angular/common';
         flex: 1;
         margin-right: 20px;
       }
-      .character-summary {
-        flex: 1;
-      }
+
 
       fieldset {
         margin-bottom: 20px;
@@ -111,28 +93,48 @@ import { CommonModule } from '@angular/common';
         margin-bottom: 5px;
       }
 
-      input[type='submit'] {
+      select, input[type='submit'] {
         display: block;
         margin-top: 15px;
       }
-
       select {
         width: 100%;
       }
-    `,
+      input[type='submit'] {
+        float: right;
+      }
+      input[type='checkbox'] {
+        margin-right: 5px;
+      }
+
+      .character-list {
+        flex: 1;
+      }
+      `,
   ],
+  imports: [FormsModule, CommonModule, CharacterListComponent],
 })
+
 export class CreateCharacterComponent {
   characters: Character[];
+
+  //order: Order;
+  createcharacter: CreateCharacter;
+
   characterId: number = 0;
   name: string = '';
   gender: string = '';
   class: string = '';
 
+  @Output() orderUpdated = new EventEmitter<CreateCharacter>();
+
   constructor() {
     this.characters = [];
+
+    this.createcharacter = { characters: [] };
   }
 
+  // addToOrder add characters to order
   createCharacter() {
     // random number between 1 and 1000 for order Id no decimal places
     this.characterId = Math.floor(Math.random() * 1000) + 1;
@@ -144,7 +146,11 @@ export class CreateCharacterComponent {
       class: this.class,
     };
 
-    this.characters.push(addCharacter);
+    this.createcharacter.characters.push(addCharacter);
+    console.log('Order after adding:', this.createCharacter);
+
+    this.orderUpdated.emit(this.createcharacter);
+
     this.resetForm();
   }
 

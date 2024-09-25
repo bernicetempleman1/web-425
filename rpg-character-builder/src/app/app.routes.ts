@@ -4,6 +4,7 @@ import { PlayersComponent } from './players/players.component';
 import { CreateGuildComponent } from './create-guild/create-guild.component';
 import { CharacterFactionComponent } from './character-faction/character-faction.component';
 import { CreateCharacterComponent } from './create-character/create-character.component';
+import { CharacterListComponent } from './character-list/character-list.component';
 
 import { SigninComponent } from './signin/signin.component';
 import { authGuard } from './auth.guard';
