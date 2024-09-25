@@ -121,7 +121,7 @@ export class CreateCharacterComponent {
   //order: Order;
   createcharacter: CreateCharacter;
 
-  characterId: number = 0;
+  id: number = 0;
   name: string = '';
   gender: string = '';
   class: string = '';
@@ -130,17 +130,16 @@ export class CreateCharacterComponent {
 
   constructor() {
     this.characters = [];
-
     this.createcharacter = { characters: [] };
   }
 
   // addToOrder add characters to order
   createCharacter() {
     // random number between 1 and 1000 for order Id no decimal places
-    this.characterId = Math.floor(Math.random() * 1000) + 1;
+    this.id = Math.floor(Math.random() * 1000) + 1;
 
     const addCharacter: Character = {
-      id: this.characterId,
+      id: this.id,
       name: this.name,
       gender: this.gender,
       class: this.class,

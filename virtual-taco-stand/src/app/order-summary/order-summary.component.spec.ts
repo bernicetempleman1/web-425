@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OrderSummaryComponent } from './order-summary.component';
 import { CommonModule } from '@angular/common';
 import { Order } from '../order/order.component';
+
 describe('OrderSummaryComponent', () => {
   let component: OrderSummaryComponent;
   let fixture: ComponentFixture<OrderSummaryComponent>;
@@ -21,9 +22,11 @@ describe('OrderSummaryComponent', () => {
     component.order = mockOrder;
     fixture.detectChanges();
   });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should calculate total price correctly', () => {
     const mockOrder: Order = {
       orderId: 1000,
@@ -35,6 +38,7 @@ describe('OrderSummaryComponent', () => {
     component.order = mockOrder;
     expect(component.getTotal()).toEqual(8.5);
   });
+  
   it('should display message for empty order', () => {
     component.order = { orderId: 1001, tacos: [] };
     fixture.detectChanges();
@@ -43,6 +47,7 @@ describe('OrderSummaryComponent', () => {
       'No tacos added to the order yet.'
     );
   });
+
   it('should display details for each taco in the order', () => {
     const mockOrder: Order = {
       orderId: 1002,
