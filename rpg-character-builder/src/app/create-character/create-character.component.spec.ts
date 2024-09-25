@@ -27,12 +27,12 @@ describe('CreateCharacterComponent', () => {
   });
 
   it('should add a character with correct customization', () => {
-    //component.selectedCharacterId = 1;
+    //component.id = 1;
     component.name = 'Bernice',
     component.gender = 'Female',
     component.class = 'Mage',
     component.createCharacter();
-    const addedCharacter = component.characters[0];
+    const addedCharacter = component.createcharacter.characters[0];
     //const addedTaco = component.order.tacos[0];
     //expect(addedCharacter.id).toBe(1);
     expect(addedCharacter.name).toBe('Bernice');
