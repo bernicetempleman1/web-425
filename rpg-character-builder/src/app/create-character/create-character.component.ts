@@ -7,7 +7,6 @@ export interface Character {
 
 export interface CreateCharacter {
   characters: Character[];
-  //orderId: number;
 }
 
 import { Component, EventEmitter, Output } from '@angular/core';
