@@ -165,8 +165,6 @@ export class CreateGuildComponent {
     acceptTerms:  this.fb.array(this.acceptTerms.map(() => false)),
   });
 
-
-
   constructor(private fb: FormBuilder) {
 
     this.guilds = [

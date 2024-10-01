@@ -30,7 +30,7 @@ import { AuthService } from './auth.service';
             <li><a routerLink="/">Home</a></li>
             <li><a routerLink="/menu">Menu</a></li>
             <li><a routerLink="/order">Order</a></li>
-            <li><a routerLink="/daily-specials">Daily Specials</a></li>
+            <li><a routerLink="/dailyspecials">Daily Specials</a></li>
             <li><a routerLink="/feedback">Feedback</a></li>
           </ul>
         </nav>
@@ -42,7 +42,7 @@ import { AuthService } from './auth.service';
         <nav class="footer-nav">
           <a routerLink="/">Home</a> | <a routerLink="/menu">Menu</a> |
           <a routerLink="/order">Order</a> |
-          <a routerLink="/daily-specials">Daily Specials</a> |
+          <a routerLink="/dailyspecials">Daily Specials</a> |
           <a routerLink="/feedback">Feedback</a>
         </nav>
         <p>&copy; 2024 Virtual Taco Stand</p>

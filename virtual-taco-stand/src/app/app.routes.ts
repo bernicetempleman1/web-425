@@ -21,17 +21,17 @@ export const routes: Routes = [
     component: MenuComponent,
   },
   {
-    path: 'order',
-    component: OrderComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'daily-specials',
+    path: 'dailyspecials',
     component: DailySpecialsComponent,
   },
   {
     path: 'feedback',
     component: FeedbackComponent,
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'signin',
