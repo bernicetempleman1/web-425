@@ -22,7 +22,6 @@ import { CommonModule } from '@angular/common';
           <p>{{ guild.type }}</p>
           <h3>Notification Preference:</h3>
           <p>{{ guild.notification }}</p>
-
         </div>
         }
       </div>
@@ -32,47 +31,41 @@ import { CommonModule } from '@angular/common';
       }
     </div>
   `,
-  styles: `
-.create-guild-form-container {
-display: flex;
-flex-direction: column;
-width: 80%;
-align-items: center;
-}
+  styles: [
+    `
+      .create-guild-form-container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        align-items: center;
+      }
 
-.create-guild-form, .feedback {
-width: 100%;
-margin-bottom: 20px;
-}
+      .create-guild-form,
+      .feedback {
+        width: 100%;
+        margin-bottom: 20px;
+      }
 
-.create-guild-container {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-between;
-gap: 20px;
-}
+      .create-guild-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
 
-.create-guild-card {
-flex: 0 0 calc(50% - 20px);
-box-sizing: border-box;
-border: 1px solid #ccc;
-border-radius: 5px;
-padding: 20px;
-margin: 10px 0;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-`,
+      .create-guild-card {
+        flex: 0 0 calc(50% - 20px);
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 10px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    `,
+  ],
 })
 export class GuildListComponent {
   @Input() createguild!: CreateGuild;
 }
-
-/*
-<h3>Accept Terms:</h3>
-          <ul class="likes-list">
-            @for(acceptTerm of guild.acceptTerms; track acceptTerm) {
-            <li>{{ acceptTerm }}</li>
-            }
-          </ul>
-*/

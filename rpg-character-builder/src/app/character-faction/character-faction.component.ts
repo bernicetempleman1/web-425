@@ -66,11 +66,8 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `,
 })
 export class CharacterFactionComponent {
-  //factions: Faction[];
-  //factionlist: FactionList;
-  factions: any = null;
-  //dailySpecial: any = null;
 
+  factions: any = null;
   noFactionMessage: string = '';
 
   constructor(private http: HttpClient) {

@@ -27,26 +27,21 @@ describe('CreateCharacterComponent', () => {
   });
 
   it('should add a character with correct customization', () => {
-    //component.id = 1;
     component.name = 'Bernice',
     component.gender = 'Female',
     component.class = 'Mage',
     component.createCharacter();
     const addedCharacter = component.createcharacter.characters[0];
-    //const addedTaco = component.order.tacos[0];
-    //expect(addedCharacter.id).toBe(1);
     expect(addedCharacter.name).toBe('Bernice');
     expect(addedCharacter.gender).toBe('Female');
     expect(addedCharacter.class).toBe('Mage');
   });
 
   it('should reset all form fields to their default values after resetForm is called', () => {
-    //component.selectedCharacterId = 2;
     component.name = 'Y';
     component.gender = 'Male';
     component.class = 'Rogue';
     component.resetForm();
-    //expect(component.selectedCharacterId).toBe(1);
     expect(component.name).toBe('');
     expect(component.gender).toBe('');
     expect(component.class).toBe('');
