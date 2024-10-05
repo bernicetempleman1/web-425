@@ -50,59 +50,8 @@ export class DailySpecialsComponent {
         },
       });
   }
-  
+
   getDayOfTheWeek(): string {
     return new Date().toLocaleDateString('en-US', { weekday: 'long' });
   }
 }
-
-/*@Component({
-  selector: 'app-dailyspecials',
-  standalone: true,
-  imports: [],
-  template: `
-    <p>
-      daily specials works!
-    </p>
-  `,
-  styles: ``
-})
-export class DailySpecialsComponent {
-
-}
-
-
-export class DailySpecialsComponent {
-  dayOfTheWeek: string;
-  dailySpecial: any = null;
-  noSpecialMessage: string = '';
-
-  constructor(private http: HttpClient) {
-    this.dayOfTheWeek = 'Monday';
-    console.log(this.dayOfTheWeek);
-    this.http
-      .get(`http://localhost:3000/api/daily-specials?day=Monday`)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.dailySpecial = res;
-        },
-        error: (err) => {
-          console.error('Error fetching daily special', err);
-          if (err.error === 'Special not found') {
-            this.noSpecialMessage = 'No special today. Check back tomorrow!';
-          } else {
-            this.noSpecialMessage =
-              'Error fetching daily special. Please try again later.';
-          }
-        },
-      });
-  }
-
-  getDayOfTheWeek(): string {
-    const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-    console.log(today);
-    return new Date().toLocaleDateString('en-US', { weekday: 'long' });
-  }
-}
-  */
